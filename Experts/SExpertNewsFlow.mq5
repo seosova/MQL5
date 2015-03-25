@@ -42,7 +42,8 @@ void OnDeinit(const int reason)
 void OnTick()
   {
 //---
-
+   NewsFromFile News1(file_name_datetime,file_name_datetime,file_name_datetime,file_name_datetime,file_name_datetime,file_name_datetime,file_name_datetime);
+   News1.SetNewsDateTimeHande(1);
   }
 //+------------------------------------------------------------------+
 //| Timer function                                                   |
@@ -69,13 +70,13 @@ public:
                      NewsFromFile(string c_file_name_datetime,string c_file_name_currency,string c_file_name_theme,string c_file_name_impact,string c_file_name_actual,string c_file_name_forecast,string c_file_name_previous);
                     ~NewsFromFile(void) {};
    void              ReloadAllNewsFiles(string c_file_name_datetime,string c_file_name_currency,string c_file_name_theme,string c_file_name_impact,string c_file_name_actual,string c_file_name_forecast,string c_file_name_previous);
-   void              SetNewsDateTimeHande(int i);
-   string            GetNewsCurrency(int m_datetime_handle);
-   string            GetNewsTheme(int m_datetime_handle);
-   string            GetNewsImpact(int m_datetime_handle);
-   double            GetNewsActual(int m_datetime_handle);
-   double            GetNewsForecast(int m_datetime_handle);
-   double            GetNewsPrevious(int m_datetime_handle);
+   datetime          SetNewsDateTimeHande(int i);
+   string            GetNewsCurrency(int c_datetime_handle);
+   string            GetNewsTheme(int c_datetime_handle);
+   string            GetNewsImpact(int c_datetime_handle);
+   double            GetNewsActual(int c_datetime_handle);
+   double            GetNewsForecast(int c_datetime_handle);
+   double            GetNewsPrevious(int c_datetime_handle);
 
   };
 //+------------------------------------------------------------------+
@@ -368,14 +369,18 @@ void NewsFromFile::ReloadAllNewsFiles(string c_file_name_datetime,string c_file_
 
   }
 //+------------------------------------------------------------------+
-void NewsFromFile::SetNewsDateTimeHande(int i)
+datetime NewsFromFile::SetNewsDateTimeHande(int i)
   {
-      datetime TimeNow=TimeCurrent();
+   MqlDateTime dt_struct;
+   TimeCurrent(dt_struct);
+   datetime newdate=dt_struct.day+dt_struct.mon;
+   return (newdate);
+
   }
 //+------------------------------------------------------------------+
-string NewsFromFile::GetNewsCurrency(datetime c_news_datetime)
-  {
-
-   return(m_news_currency[i]);
-  }
+//string NewsFromFile::GetNewsCurrency(datetime c_news_datetime)
+//  {
+//
+//   return(m_news_currency[i]);
+//  }
 //+------------------------------------------------------------------+
